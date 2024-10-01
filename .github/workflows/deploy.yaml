@@ -1,0 +1,28 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Docker images
+      run: | 
+        docker build -t back .
+
+    - name: Deploy Docker container
+      run: |
+        docker stop back || true
+        docker rm -f back || true
+        docker run --restart unless-stopped --name back -dp 8000:8000 \
+          -v /home/ubuntu/back/dotenv:/app/.env \
+          -v /home/ubuntu/back/media:/app/media back
+
+    - name: Cleanup old Docker images
+      run: |
+        docker image prune -f
