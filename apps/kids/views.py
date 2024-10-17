@@ -3,8 +3,19 @@ from datetime import datetime
 from main.paginations import CustomLimitOffsetPagination
 from .serializers import TeacherSerializer, ParticipantSerializer, ParticipantDetailSerializer, \
     TeacherDetailSerializer, WinnerSerializer, YouTubeVideoSerializer, MainSerializer, VoiceTimeSerializer, \
-    BannerSerializer, SeasonSerializer
-from .models import Teacher, Participant, Winner, VoiceTime, YouTubeVideo, Casting, Season, Main, Banner
+    BannerSerializer, SeasonSerializer, SponsorAndPartnerSerializer
+from .models import Teacher, Participant, Winner, VoiceTime, YouTubeVideo, Casting, Season, Main, Banner, Sponsor, \
+    Partner
+
+
+class SponsorAPI(generics.ListAPIView):
+    queryset = Sponsor.objects.all()
+    serializer_class = SponsorAndPartnerSerializer
+
+
+class PartnerAPI(generics.ListAPIView):
+    queryset = Partner.objects.all()
+    serializer_class = SponsorAndPartnerSerializer
 
 
 class VoiceTimeAPI(generics.GenericAPIView):

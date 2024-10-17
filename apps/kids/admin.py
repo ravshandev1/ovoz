@@ -1,7 +1,18 @@
 from django.contrib import admin
-from .models import VoiceTime, Season, Banner, Main, Casting, YouTubeVideo, Teacher, Participant, Winner
+from .models import VoiceTime, Season, Banner, Main, Casting, YouTubeVideo, Teacher, Participant, Winner, Sponsor, \
+    Partner
 from .translations import CustomAdmin
 from datetime import datetime
+
+
+@admin.register(Sponsor)
+class SponsorAdmin(admin.ModelAdmin):
+    list_display = ['id', 'icon']
+
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'icon']
 
 
 @admin.register(Winner)

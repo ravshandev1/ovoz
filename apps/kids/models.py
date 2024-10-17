@@ -183,3 +183,34 @@ class Winner(models.Model):
     @property
     def image_url(self):
         return f"{settings.BASE_URL}{self.image.url}"
+
+
+class Sponsor(models.Model):
+    icon = models.FileField(upload_to='sponsors')
+    link = models.URLField(max_length=350)
+
+    class Meta:
+        verbose_name = "Homiy"
+        verbose_name_plural = "Homiylar"
+        ordering = ['id']
+
+    def __str__(self):
+        return self.icon.name
+
+    @property
+    def icon_url(self):
+        return f"{settings.BASE_URL}{self.icon.url}"
+
+
+class Partner(models.Model):
+    class Meta:
+        verbose_name = "Partnor"
+        verbose_name_plural = "Partnorlar"
+        ordering = ['id']
+
+    icon = models.FileField(upload_to='partners')
+    link = models.URLField(max_length=350)
+
+    @property
+    def icon_url(self):
+        return f"{settings.BASE_URL}{self.icon.url}"

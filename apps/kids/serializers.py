@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import Teacher, Participant, Winner, Main, Banner, Season, VoiceTime, YouTubeVideo
 from main.models import UserInActive
 
+
+class SponsorAndPartnerSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    icon = serializers.CharField(source='icon_url')
+    link = serializers.CharField()
+
+
 class YouTubeVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = YouTubeVideo
@@ -30,7 +37,6 @@ class MainSerializer(serializers.ModelSerializer):
         ref_name = "Kids"
 
     image = serializers.CharField(source='image_url')
-
 
 
 class BannerSerializer(serializers.ModelSerializer):
@@ -84,11 +90,13 @@ class ParticipantSerializer(serializers.ModelSerializer):
     guid = serializers.IntegerField(source='id')
     text = serializers.SerializerMethodField()
     image = serializers.CharField(source='image_url')
+
     def get_text(self, obj):
         if obj.is_active:
             return None
         text = UserInActive.objects.first()
         return text.text if text else None
+
 
 class WinnerSerializer(serializers.ModelSerializer):
     class Meta:

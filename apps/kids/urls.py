@@ -14,4 +14,6 @@ urlpatterns = [
     path('participants/', views.ParticipantAPI.as_view()),
     path('teacher/<int:pk>/', views.TeacherDetailAPI.as_view()),
     path('participant/<int:pk>/', views.ParticipantDetailAPI.as_view()),
+    path('sponsors/', views.SponsorAPI.as_view()),
+    path('partners/', views.PartnerAPI.as_view()),
 ]
