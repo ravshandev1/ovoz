@@ -7,6 +7,8 @@ class SponsorAndPartnerSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     icon = serializers.CharField(source='icon_url')
     link = serializers.CharField()
+    class Meta:
+        ref_name = "Kids"
 
 
 class YouTubeVideoSerializer(serializers.ModelSerializer):
